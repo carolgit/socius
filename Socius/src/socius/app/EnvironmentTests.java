@@ -2,13 +2,13 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package socius.adapter;
+package socius.app;
 
 /**
  *
  * @author Ana
  */
-public class app {
+public class EnvironmentTests {
     public static void main(String[] args) {
         //http://docs.oracle.com/javase/tutorial/essential/environment/sysprop.html
         System.out.println("Sistema Operacional:"+System.getProperty("os.name"));

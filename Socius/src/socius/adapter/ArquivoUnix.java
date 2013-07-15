@@ -14,6 +14,9 @@ import java.io.InputStream;
  */
 public class ArquivoUnix implements Arquivo{
 
+    public ArquivoUnix(String path) {
+    }
+
     @Override
     public File getFile() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
@@ -34,6 +37,4 @@ public class ArquivoUnix implements Arquivo{
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    
-    
 }

@@ -15,10 +15,11 @@ import socius.dispositivos.Servidor;
  */
 public class ServerBoot {
     
-    public static void main(String[] args) {
+    public static void main(String[] args) throws Exception {
         
         // Instancia e inicializa o Servidor para
         // escuta e atendimento de requisições na respectiva porta
+        
         Servidor server;
         try {
             server = new Servidor();

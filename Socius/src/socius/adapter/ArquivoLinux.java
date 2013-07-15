@@ -13,7 +13,10 @@ import java.io.InputStream;
  * @author Ana
  */
 public class ArquivoLinux implements Arquivo{
-
+    
+    public ArquivoLinux(String path) {
+    }
+    
     @Override
     public File getFile() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
@@ -34,6 +37,4 @@ public class ArquivoLinux implements Arquivo{
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-   
-    
 }

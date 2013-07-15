@@ -19,6 +19,11 @@ import java.util.logging.Logger;
 public class ArquivoWindows implements Arquivo{
     private File file;
     private FileInputStream inputStream;
+
+    public ArquivoWindows(String path) {
+        file = new File(path);
+    }
+    
     @Override
     public File getFile() {
         return file;
@@ -49,6 +54,4 @@ public class ArquivoWindows implements Arquivo{
         this.inputStream=inputStream;
     }
 
-   
-    
 }
