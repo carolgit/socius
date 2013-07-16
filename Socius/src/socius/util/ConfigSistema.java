@@ -7,6 +7,7 @@ package socius.util;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.Properties;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -26,10 +27,13 @@ public abstract class ConfigSistema {
     static {
         try {
             properties = new Properties();
-            properties.load(new FileInputStream("socius" + File.pathSeparator + "socius.properties"));
+            InputStream stream = ConfigSistema.class
+                    .getResourceAsStream("/socius.properties");
+            properties.load(stream);
+            stream.close();
         } catch (IOException ex) {
             Logger.getLogger(ConfigSistema.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        } 
     }
     
     public static String getProperty(String identificacao) {

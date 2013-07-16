@@ -22,6 +22,9 @@ public class ArquivoWindows implements Arquivo{
 
     public ArquivoWindows(String path) {
         file = new File(path);
+        
+        if(!file.isFile())
+            file.mkdirs();
     }
     
     @Override

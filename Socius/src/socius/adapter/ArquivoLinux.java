@@ -14,12 +14,18 @@ import java.io.InputStream;
  */
 public class ArquivoLinux implements Arquivo{
     
+    private File file;
+    
     public ArquivoLinux(String path) {
+        file = new File(path);
+
+        if(!file.isFile())
+            file.mkdirs();
     }
     
     @Override
     public File getFile() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return file;
     }
 
     @Override
@@ -29,7 +35,7 @@ public class ArquivoLinux implements Arquivo{
 
     @Override
     public void setFile(File file) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        this.file = file;
     }
 
     @Override

@@ -31,20 +31,24 @@ public class Computador extends UnicastRemoteObject implements EstadoComputador 
         // Estado inicial 
         estado = new EstadoOffline(this);
 
+        // Inicializa pasta pública compartilhada
         arquivos = ArquivoFactory.getFactory().getArquivo();
     }
 
-    public List<Arquivo> getArquivos() 
+    public List<Arquivo> getArquivos()
             throws RemoteException, SistemaOperacionalNaoSuportadoException {
+        
         File[] arquivosPasta = arquivos.getFile().listFiles();
         List<Arquivo> lista = new ArrayList<>();
 
         for (int i = 0; i < arquivosPasta.length; i++) {
-            String absPath = arquivosPasta[i].getAbsolutePath();
-            Arquivo arq = ArquivoFactory.getFactory().getArquivo(absPath);
-            lista.add(arq);
+            if (arquivosPasta[i].isFile()) {
+                String absPath = arquivosPasta[i].getAbsolutePath();
+                Arquivo arq = ArquivoFactory.getFactory().getArquivo(absPath);
+                lista.add(arq);
+            }
         }
-        
+
         return lista;
 
     }

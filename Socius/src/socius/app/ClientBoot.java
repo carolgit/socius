@@ -6,6 +6,7 @@ package socius.app;
 
 import java.rmi.RemoteException;
 import socius.dispositivos.Computador;
+import socius.excecoes.FalhaNaConexaoComServidorException;
 import socius.excecoes.SistemaOperacionalNaoSuportadoException;
 
 /**
@@ -14,7 +15,8 @@ import socius.excecoes.SistemaOperacionalNaoSuportadoException;
  */
 public class ClientBoot {
     public static void main(String[] args) throws RemoteException, 
-            SistemaOperacionalNaoSuportadoException {
+            SistemaOperacionalNaoSuportadoException,
+            FalhaNaConexaoComServidorException {
         
         // Instancia computador
         Computador computador = new Computador();

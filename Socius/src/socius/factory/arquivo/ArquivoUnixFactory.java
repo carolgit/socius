@@ -29,7 +29,7 @@ public class ArquivoUnixFactory extends ArquivoFactory {
     
     @Override
     public Arquivo getArquivo() {
-        String path = System.getProperty("user.dir") + File.pathSeparator + 
+        String path = System.getProperty("user.home") + File.separator + 
                 ConfigSistema.getProperty("cliente.pasta_publica");
         
         return new ArquivoUnix(path);
