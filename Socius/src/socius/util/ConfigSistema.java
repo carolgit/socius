@@ -16,6 +16,8 @@ import java.util.logging.Logger;
  * @author Lucas Dillmann <lucas [at] dillmann.com.br>
  * 
  * Classe utilitária para leitura das configurações do sistema
+ * armazenadas em um arquivo de propiedades
+ * 
  */
 public abstract class ConfigSistema {
     

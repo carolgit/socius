@@ -5,6 +5,7 @@
 package socius.state;
 
 import socius.dispositivos.Computador;
+import socius.excecoes.FalhaNaConexaoComServidorException;
 
 /**
  *
@@ -19,7 +20,8 @@ public class EstadoOffline implements EstadoComputador {
     }
     
     @Override
-    public void conectar() {
+    public void conectar() throws FalhaNaConexaoComServidorException {
+        throw new FalhaNaConexaoComServidorException();
     }
 
     @Override

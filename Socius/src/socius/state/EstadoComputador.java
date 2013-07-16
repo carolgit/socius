@@ -4,11 +4,13 @@
  */
 package socius.state;
 
+import socius.excecoes.FalhaNaConexaoComServidorException;
+
 /**
  *
  * @author Ana
  */
 public interface EstadoComputador{
-    public void conectar();
+    public void conectar() throws FalhaNaConexaoComServidorException;
     public void desconectar();
 }
