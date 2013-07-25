@@ -1,0 +1,93 @@
+/*
+ * To change this template, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package socius.state;
+
+import java.net.InetAddress;
+import java.net.MalformedURLException;
+import java.net.UnknownHostException;
+import java.rmi.Naming;
+import java.rmi.NotBoundException;
+import java.rmi.Remote;
+import java.rmi.RemoteException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import socius.dispositivos.Computador;
+import socius.excecoes.FalhaNaConexaoComServidorException;
+import socius.excecoes.SistemaOperacionalNaoSuportadoException;
+import socius.stream.Transferencia;
+import socius.adapter.Arquivo;
+
+
+/**
+ *
+ * @author Ana Caroline Ferreira
+ */
+public class EstadoOffline implements EstadoComputador {
+    
+    private Computador computador;
+    private String estado="offline";
+    private ObservableList<Arquivo> arquivos=FXCollections.observableArrayList();
+    
+    public EstadoOffline(Computador computador) {
+        this.computador = computador;
+    }
+    public String compartilhados() throws RemoteException, SistemaOperacionalNaoSuportadoException{
+       if(!computador.getArquivos().isEmpty()) {
+            return "Lista de Arquivos:";
+       }else{
+           return "Nenhum Arquivo Compartilhado no momento";
+       }
+    }
+    @Override
+    public void conectar() throws FalhaNaConexaoComServidorException {
+//        Scanner tc = new Scanner(System.in);
+//        System.out.println("Deseja se conectar?(y/n)");
+//        String ans = tc.nextLine();
+//        if(ans.equalsIgnoreCase("y")){
+            try {
+                //disponibiliza pc
+               
+                Naming.rebind("Computador", computador);
+                //busca servidor
+                Remote remote=Naming.lookup("Compartilha");
+                Transferencia iServidor=(Transferencia) remote; 
+                 //muda de estado
+                computador.setEstado(computador.getOnline());
+                System.out.println(computador.getEstado());
+                //retorna mensagem ao servidor 
+                iServidor.setmensagemServidor("Seja Bem Vindo! \n Novo Estado:"+computador.getEstado());
+                System.out.println(computador.getHost()+":"+computador.getArquivos());
+                //retorna lista de arquivos deste computador e o ip do mesmo
+                iServidor.setlista(computador.getHost(), computador.getArquivos());
+            } catch (RemoteException ex) {
+                Logger.getLogger(EstadoOffline.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (MalformedURLException ex) {
+                Logger.getLogger(EstadoOffline.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (NotBoundException ex) {
+                Logger.getLogger(EstadoOffline.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (SistemaOperacionalNaoSuportadoException ex) { 
+            Logger.getLogger(EstadoOffline.class.getName()).log(Level.SEVERE, null, ex);
+            } 
+           
+        }
+
+    @Override
+    public void desconectar() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public String toString() {
+        return "EstadoOffline{" + "estado=" + estado + ", arquivos=" + arquivos + '}';
+    }
+
+    public ObservableList<Arquivo> getArquivos() {
+        return arquivos;
+    }
+    
+    
+}
