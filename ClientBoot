@@ -1,0 +1,32 @@
+/*
+ * To change this template, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package socius.app;
+
+import java.net.UnknownHostException;
+import java.rmi.RemoteException;
+import socius.dispositivos.Computador;
+import socius.excecoes.FalhaNaConexaoComServidorException;
+import socius.excecoes.SistemaOperacionalNaoSuportadoException;
+
+/**
+ *
+ * @author Ana Caroline Ferreira
+ */
+public class ClientBoot {
+    Computador computador;
+    public Computador setup() throws RemoteException, SistemaOperacionalNaoSuportadoException, UnknownHostException, FalhaNaConexaoComServidorException{
+        // Instancia computador
+        Computador computador = new Computador();
+        
+        // Tenta realizar a conexão com servidor
+        computador.conectar();
+        // TODO: 
+        // InterfaceGrafica interface = new InterfaceGrafica(computador);
+        // interface.inicializar();
+        // interface.exibir();
+        return computador;
+        
+    }
+}
