@@ -1,0 +1,62 @@
+/*
+ * To change this template, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package aasocius2;
+
+import java.net.MalformedURLException;
+import java.rmi.Naming;
+import java.rmi.NotBoundException;
+import java.rmi.Remote;
+import java.rmi.RemoteException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.fxml.FXML;
+import javafx.scene.control.ListView;
+import socius.adapter.Arquivo;
+import socius.stream.Transferencia;
+
+/**
+ *
+ * @author Ana
+ */
+public class PrincipalControllerThread implements Runnable{
+    private Remote remote;
+    private Transferencia iServidor;
+    private ObservableList obslista=FXCollections.observableArrayList();
+    private ListView<Arquivo> lista_arquivos;
+
+    public PrincipalControllerThread(ListView<Arquivo> lista_arquivos) {
+        this.lista_arquivos=lista_arquivos;
+    }
+     
+    
+    @FXML
+    public void download(){
+        
+    }
+    @FXML
+    public void upload(){
+        
+    }    
+   
+    @Override
+    public void run() {
+        try {         
+            remote=Naming.lookup("Compartilha");
+            iServidor=(Transferencia) remote;
+            obslista=FXCollections.observableList(iServidor.getlista());
+            for(int i=0;i<obslista.size();i++)
+                lista_arquivos.getItems().add(iServidor.getlista().get(i));
+        } catch (RemoteException ex) {
+            Logger.getLogger(PrincipalControllerThread.class.getName()).log(Level.SEVERE, "Erro metodo remoto", ex);
+        } catch (NotBoundException ex) {
+            Logger.getLogger(PrincipalControllerThread.class.getName()).log(Level.SEVERE, "Erro ", ex);
+        } catch (MalformedURLException ex) {
+            Logger.getLogger(PrincipalControllerThread.class.getName()).log(Level.SEVERE, "Erro url ruim", ex);
+        }
+    }
+    
+}
