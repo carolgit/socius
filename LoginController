@@ -1,0 +1,58 @@
+/*
+ * To change this template, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package aasocius2;
+
+import java.net.URL;
+import java.util.ResourceBundle;
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
+import javafx.scene.control.PasswordField;
+import javafx.scene.control.TextField;
+import javafx.stage.Stage;
+
+/**
+ * FXML Controller class
+ *
+ * @author Ana
+ */
+public class LoginController implements Initializable {
+
+    /**
+     * Initializes the controller class.
+     */
+    private Setup setup=new Setup();
+    @FXML
+    private Button cancelar;
+    @FXML
+    private Button confirmar;
+    @FXML
+    private TextField usuario;
+    @FXML
+    private PasswordField senha;
+    
+    @FXML
+    private void cancelar(){
+        usuario.clear();
+        senha.clear();
+    }
+    @FXML
+    public void controleAcesso(ActionEvent e) throws Exception, Throwable{
+        if(usuario.getText().equals("admin")&&senha.getText().equals("admin")){
+            //fecho a janela de login
+            Stage stage=(Stage) confirmar.getScene().getWindow();
+            stage.close();
+            //abro a janela principal
+            setup.setRedirecionamento("principal.fxml");
+            setup.start(stage);
+            
+        }
+        System.out.println("Entra no controle");
+    }
+    @Override
+    public void initialize(URL url, ResourceBundle rb) {
+    }    
+}
