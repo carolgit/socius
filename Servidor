@@ -1,0 +1,103 @@
+/*
+ * To change this template, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package socius.dispositivos;
+
+import aasocius2.PrincipalControllerThread;
+import aasocius2.principalController;
+import java.net.URL;
+import socius.adapter.Arquivo;
+import java.rmi.Naming;
+import java.rmi.RemoteException;
+import java.rmi.registry.LocateRegistry;
+import java.rmi.registry.Registry;
+import java.rmi.server.UnicastRemoteObject;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import socius.stream.Transferencia;
+
+/**
+ *
+ * @author Ana
+ */
+public class Servidor extends UnicastRemoteObject implements Transferencia{
+    private List<String> clientes=new ArrayList<String>();
+    private String host,mensagem;
+    private List<Arquivo> arquivos=new ArrayList<Arquivo>();
+    private List<URL> urls=new ArrayList<>();
+    
+    public Servidor()throws RemoteException {
+    }
+    
+    public void escutar() throws Exception {
+        
+        try {
+            LocateRegistry.createRegistry(Registry.REGISTRY_PORT);
+            //cria um objeto remoto
+             Servidor servidor=new Servidor();
+             //setar a instancia corrente
+             Naming.rebind("Compartilha",servidor);
+             System.out.println("Servidor Aberto e Operante!");
+             for(int i=0;i<servidor.getClientes().size();i++){
+                 System.out.println("Conectados"+servidor.getClientes().get(i));
+             }
+             
+        } catch (RemoteException ex) {
+            Logger.getLogger(Servidor.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+    }
+
+    public List<String> getClientes() {
+        return clientes;
+    }
+
+
+
+    @Override
+    public void iniciar(Computador origem, Computador destino, Arquivo arquivo) throws RemoteException {
+    }
+
+    @Override
+    public List<Arquivo> getlista() throws RemoteException {
+        return this.arquivos;
+    }
+
+    @Override
+    public void setmensagemServidor(String msg) {
+        mensagem=msg;
+    }
+
+    @Override
+    public String getmensagemServidor() {
+        return mensagem;
+    }
+
+    @Override
+    public String host() throws RemoteException {
+        return host;
+    }
+
+    @Override
+    public void setlista(String host, List<Arquivo> allfiles) throws RemoteException {
+        //inserre todos os elementos da lista na lista completa
+        for(int i=0;i<allfiles.size();i++){
+            arquivos.add(allfiles.get(i));
+        }
+        this.host=host;
+        //adiciona o host a lista de clientes
+        clientes.add(host);
+        // se lista de clientes aumentou e entao atualiza
+        //lista de arquivos e clientes nas telas cliente
+        
+    }
+
+    @Override
+    public void setAplication(URL url) throws RemoteException {
+        urls.add(url);
+    }
+    
+}
