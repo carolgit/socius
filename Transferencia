@@ -1,0 +1,26 @@
+/*
+ * To change this template, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package socius.stream;
+
+import java.net.URL;
+import socius.adapter.Arquivo;
+import socius.dispositivos.Computador;
+import java.rmi.Remote;
+import java.rmi.RemoteException;
+import java.util.List;
+
+/**
+ *
+ * @author Ana
+ */
+public interface Transferencia extends Remote{
+    public void iniciar(Computador origem,Computador destino, Arquivo arquivo)throws RemoteException;
+    public void setlista(String host,List<Arquivo> allfiles)throws RemoteException;
+    public List<Arquivo> getlista()throws RemoteException;
+    public String host()throws RemoteException;
+    public void setmensagemServidor(String msg)throws RemoteException;
+    public String getmensagemServidor()throws RemoteException;
+    public void setAplication(URL url)throws RemoteException;
+}
