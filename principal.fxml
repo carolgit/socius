@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.net.*?>
+<?import java.util.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" styleClass="mainFxmlClass" xmlns:fx="http://javafx.com/fxml" fx:controller="aasocius2.principalController">
+  <children>
+    <BorderPane id="borderPane1" prefHeight="400.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <bottom>
+        <MenuBar id="menuBar1">
+          <menus>
+            <Menu id="download" mnemonicParsing="false" onAction="#download" text="Download" />
+            <Menu mnemonicParsing="false"  text="F5" fx:id="" />
+            <Menu id="logoff" mnemonicParsing="false" style="" text="Logoff" />
+          </menus>
+          <BorderPane.margin>
+            <Insets left="440.0" />
+          </BorderPane.margin>
+        </MenuBar>
+      </bottom>
+      <center>
+        <ListView fx:id="lista_arquivos" prefHeight="200.0" prefWidth="200.0" />
+      </center>
+      <left>
+        <SplitPane id="splitPaneVertical1" dividerPositions="0.5" focusTraversable="true" orientation="VERTICAL" prefHeight="200.0" prefWidth="160.0">
+          <items>
+            <AnchorPane id="anchorPane1" minHeight="0.0" minWidth="0.0" prefHeight="201.0" prefWidth="158.0">
+              <children>
+                <BorderPane prefHeight="203.0" prefWidth="158.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                  <bottom>
+                    <Pane prefHeight="24.0" prefWidth="158.0">
+                      <children>
+                        <Button layoutX="102.0" layoutY="3.0" mnemonicParsing="false" text="ADD" />
+                      </children>
+                    </Pane>
+                  </bottom>
+                  <center>
+                    <ListView prefHeight="200.0" prefWidth="200.0" />
+                  </center>
+                  <top>
+                    <Pane prefHeight="24.0" prefWidth="158.0">
+                      <children>
+                        <Label id="label2" layoutX="40.0" layoutY="5.0" text="Meus Arquivos">
+                          <font>
+                            <Font name="System Bold" size="12.0" fx:id="x1" />
+                          </font>
+                        </Label>
+                        <Separator id="separatorHorizontal1" layoutY="19.0" prefWidth="158.0" />
+                      </children>
+                    </Pane>
+                  </top>
+                </BorderPane>
+              </children>
+            </AnchorPane>
+            <AnchorPane id="anchorPane2" minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
+              <children>
+                <TreeView id="treeView1" prefHeight="196.0" prefWidth="158.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+              </children>
+            </AnchorPane>
+          </items>
+        </SplitPane>
+      </left>
+      <top>
+        <Pane id="pane1" prefHeight="30.0" prefWidth="600.0">
+          <children>
+            <Label id="label1" font="$x1" layoutX="225.0" layoutY="7.0" text="Filtro:" />
+            <TextField id="textField1" layoutX="266.0" layoutY="4.0" prefWidth="264.0" />
+            <Button id="button1" layoutX="539.0" layoutY="5.0" mnemonicParsing="false" text="OK" />
+            <Separator id="separatorVertical1" layoutX="171.0" orientation="VERTICAL" prefHeight="30.0" />
+            <Label fx:id="boasvindas" layoutX="14.0" layoutY="5.0" text=" " textFill="#660000">
+              <font>
+                <Font name="System Bold" size="6.0" />
+              </font>
+            </Label>
+          </children>
+        </Pane>
+      </top>
+    </BorderPane>
+  </children>
+  <stylesheets>
+    <URL value="@principal.css" />
+  </stylesheets>
+</AnchorPane>
