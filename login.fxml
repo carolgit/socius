@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.net.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.text.*?>
+<?scenebuilder-background-color 0xcc0000ff?>
+
+<AnchorPane id="AnchorPane" prefHeight="250.0" prefWidth="422.0" styleClass="mainFxmlClass" xmlns:fx="http://javafx.com/fxml" fx:controller="aasocius2.LoginController">
+  <children>
+    <BorderPane id="borderPane1" prefHeight="250.0" prefWidth="422.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <center>
+        <Pane id="pane1">
+          <children>
+            <Label id="label2" layoutX="45.0" layoutY="55.0" text="Usuário:" />
+            <Label id="label3" layoutX="49.0" layoutY="82.0" text="Senha:" />
+            <TextField id="textField1" layoutX="102.0" layoutY="46.0" prefWidth="248.0" fx:id="usuario"  />
+            <PasswordField id="passwordField1" layoutX="102.0" layoutY="82.0" prefWidth="248.0" fx:id="senha" />
+            <Button id="button1" layoutX="295.0" layoutY="130.0" mnemonicParsing="false" text="Cancelar" fx:id="cancelar" onAction="#cancelar"  />
+            <Button id="button2" layoutX="222.0" layoutY="130.0" mnemonicParsing="false" text="Confirmar" fx:id="confirmar" onAction="#controleAcesso"  />
+          </children>
+        </Pane>
+      </center>
+      <effect>
+        <DropShadow />
+      </effect>
+      <top>
+        <Label id="label1" opacity="0.68" text="Controle de Acesso">
+          <font>
+            <Font name="System Bold" size="24.0" />
+          </font>
+        </Label>
+      </top>
+    </BorderPane>
+  </children>
+  <stylesheets>
+    <URL value="@login.css" />
+  </stylesheets>
+</AnchorPane>
