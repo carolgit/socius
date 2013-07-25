@@ -1,0 +1,95 @@
+/*
+ * To change this template, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package aasocius2;
+
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.net.UnknownHostException;
+import java.rmi.Naming;
+import java.rmi.NotBoundException;
+import java.rmi.Remote;
+import java.rmi.RemoteException;
+import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
+import javafx.scene.control.Label;
+import javafx.scene.control.ListView;
+import socius.adapter.Arquivo;
+import socius.app.ClientBoot;
+import socius.dispositivos.Computador;
+import socius.excecoes.FalhaNaConexaoComServidorException;
+import socius.excecoes.SistemaOperacionalNaoSuportadoException;
+import socius.stream.Transferencia;
+/**
+ *Singleton-preciso acessar em servidor
+ * @author Ana
+ */
+public class principalController  implements Initializable {
+    private static principalController instace;
+    Computador computador;
+    private ObservableList obslista=FXCollections.observableArrayList();
+    @FXML
+    private ListView<Arquivo> lista_arquivos;
+    @FXML
+    private Label boasvindas;
+    private Remote remote;
+    private Transferencia iServidor;
+
+    public static principalController getInstance(){
+        if(instace==null){
+            if(instace==null){
+                instace=new principalController();
+            }
+        }return instace;
+    }
+    @FXML
+    public void download(){
+        
+    }
+    @FXML
+    public void upload(){
+        
+    }   
+    
+    @Override
+    public void initialize(URL url, ResourceBundle rb) {
+        try {
+            
+            ClientBoot boot=new ClientBoot();
+            computador=boot.setup();
+            //procura pelo servidor
+            remote=Naming.lookup("Compartilha");
+            iServidor=(Transferencia) remote;
+            //manda para o servidor as apps abertas
+            iServidor.setAplication(url);
+            //insere mensagem de boas vindas
+            boasvindas.setText(iServidor.getmensagemServidor());
+            //mostra lista na tela
+            //procura lista de arquivos do computador;
+            //insere na lista
+            PrincipalControllerThread pct=new PrincipalControllerThread(lista_arquivos);
+            Thread tlista=new Thread(pct);
+            tlista.run();
+            
+        } catch (RemoteException ex) {
+            Logger.getLogger(principalController.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SistemaOperacionalNaoSuportadoException ex) {
+            Logger.getLogger(principalController.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (UnknownHostException ex) {
+            Logger.getLogger(principalController.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (FalhaNaConexaoComServidorException ex) {
+            Logger.getLogger(principalController.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (NotBoundException ex) {
+            Logger.getLogger(principalController.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (MalformedURLException ex) {
+            Logger.getLogger(principalController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+}
